@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/12 16:16:36 by vmoreau           #+#    #+#              #
-#    Updated: 2021/04/13 11:26:50 by vmoreau          ###   ########.fr        #
+#    Updated: 2021/04/13 16:07:55 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ CH	= ./srcs_checker/
 
 PS	= ./srcs_push_swap/
 ################################SOURCES CHECKER################################
-SRCS1 += $(CH)main.c	$(CH)store.c
+SRCS1 += $(CH)main.c	$(CH)store.c	$(CH)utils.c 	$(CH)input_verif.c	\
+		 $(CH)swap.c	$(CH)push.c		$(CH)rotate.c	$(CH)r_rotate.c	\
 
 ###############################SOURCES PUSH_SWAP###############################
 SRCS2 += $(PS)main.c

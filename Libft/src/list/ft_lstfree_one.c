@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstfree_one.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 12:12:50 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/14 15:47:16 by vmoreau          ###   ########.fr       */
+/*   Created: 2021/04/14 00:51:27 by vmoreau           #+#    #+#             */
+/*   Updated: 2021/04/14 15:50:25 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *))
+void			ft_lstfree_one(t_list **lst)
 {
-	t_list		*first;
-	t_list		*map;
+	t_list *tmp;
 
-	if (lst == NULL)
-		return (NULL);
-	if (!(map = ft_lstnew(f(lst))))
-		return (NULL);
-	first = map;
-	while (lst != NULL)
-	{
-		if (lst->next != NULL)
-		{
-			if (!(map->next = ft_lstnew((*f)(lst->next))))
-			{
-				ft_lstclear(first);
-				return (0);
-			}
-			map = map->next;
-		}
-		lst = lst->next;
-	}
-	map = 0;
-	return (first);
+	tmp = *lst;
+	if (!tmp)
+		return ;
+	if (tmp->content)
+		free(tmp->content);
+	free(tmp);
 }

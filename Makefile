@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/12 16:16:36 by vmoreau           #+#    #+#              #
-#    Updated: 2021/04/13 16:07:55 by vmoreau          ###   ########.fr        #
+#    Updated: 2021/04/14 15:29:05 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,8 @@ SRCS2 += $(PS)main.c
 
 ####################################BASIC######################################
 
-# CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror
 
 CC = clang
 

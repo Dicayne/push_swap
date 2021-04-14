@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:16:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/13 17:25:47 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/14 16:13:50 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	catch_input(t_stacks *stacks, char *input)
 		else if (ft_strlen(input) == 3)
 			r_rotate(stacks, input);
 	}
+	else if(ft_strcmp(input, "d"))
+		display(stacks->a);
 	else if(input[0] == '\0')
 		printf("No input\n");
 	else
@@ -40,7 +42,7 @@ void	wait_input(t_stacks *stacks)
 	{
 		printf("Input: %s\n", line);
 		catch_input(stacks, line);
-		printf("\n");
+		display_lst(stacks->a, stacks->b);
 	}
 }
 

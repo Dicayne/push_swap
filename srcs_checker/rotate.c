@@ -6,33 +6,36 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:41:51 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/13 16:18:57 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/14 14:16:08 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void rotate_a(t_stacks *stacks)
+void rotate2(t_list **s)
 {
-	(void)stacks;
-}
+	t_list *tmp;
 
-void rotate_b(t_stacks *stacks)
-{
-	(void)stacks;
-}
-
-void rotate_r(t_stacks *stacks)
-{
-	(void)stacks;
+	if (ft_lstsize(*s) > 1)
+	{
+		tmp = *s;
+		while (tmp)
+		{
+			swap2(&tmp);
+			tmp = tmp->next;
+		}
+	}
 }
 
 void rotate(t_stacks *stacks, char *input)
 {
 	if (!ft_strcmp(input, "ra"))
-		rotate_a(stacks);
+		rotate2(&stacks->a);
 	else if (!ft_strcmp(input, "rb"))
-		rotate_b(stacks);
+		rotate2(&stacks->b);
 	else
-		rotate_r(stacks);
+	{
+		rotate2(&stacks->a);
+		rotate2(&stacks->b);
+	}
 }

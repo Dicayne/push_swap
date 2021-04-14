@@ -6,18 +6,18 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 11:11:52 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/06 17:59:53 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/14 16:04:08 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void			ft_lstclear(t_list *lst)
 {
-	if (*lst != NULL && del != NULL)
-	{
-		ft_lstclear(&(*lst)->next, del);
-		ft_lstdelone(*lst, del);
-		*lst = NULL;
-	}
+	if (!lst)
+		return ;
+	if ((lst)->next)
+		ft_lstclear((lst)->next);
+	ft_lstfree_one(&lst);
+	lst = NULL;
 }

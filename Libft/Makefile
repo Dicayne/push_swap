@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 15:18:39 by vmoreau           #+#    #+#              #
-#    Updated: 2021/04/12 17:13:03 by vmoreau          ###   ########.fr        #
+#    Updated: 2021/04/14 00:52:35 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ SRCS +=	$(MEM)ft_memset.c		$(MEM)ft_bzero.c	$(MEM)ft_memcpy.c	\
 #----------------LIST----------------#
 SRCS += $(LST)ft_lstadd_back.c	$(LST)ft_lstmap.c	$(LST)ft_lstclear.c	\
 		$(LST)ft_lstdelone.c	$(LST)ft_lstiter.c	$(LST)ft_lstsize.c	\
-		$(LST)ft_lstadd_front.c	$(LST)ft_lstlast.c	$(LST)ft_lstnew.c
+		$(LST)ft_lstadd_front.c	$(LST)ft_lstlast.c	$(LST)ft_lstnew.c	\
+		$(LST)ft_lstfree_one.c
 
 #------------GET NEXT LINE-----------#
 SRCS += $(GNL)get_next_line.c	$(GNL)get_next_line_utils.c

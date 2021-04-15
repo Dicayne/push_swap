@@ -1,40 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   store2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/13 15:41:52 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/14 17:36:25 by vmoreau          ###   ########.fr       */
+/*   Created: 2021/04/13 00:52:11 by vmoreau           #+#    #+#             */
+/*   Updated: 2021/04/15 01:47:26 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap2(t_list **s)
+void	free_args(char **args)
 {
-	t_list	*tmp;
-	int		*tmp_num;
+	int i;
 
-	if (ft_lstsize(*s) > 1)
+	i = 0;
+	while (args[i])
 	{
-		tmp = *s;
-		tmp_num = tmp->content;
-		tmp->content = tmp->next->content;
-		tmp->next->content = tmp_num;
+		free(args[i]);
+		i++;
 	}
+	free(args);
 }
 
-void	swap(t_stacks *stacks, char *input)
+char	**stock_av(char **av)
 {
-	if (!ft_strcmp(input, "sa"))
-		swap2(&stacks->a);
-	else if (!ft_strcmp(input, "sb"))
-		swap2(&stacks->b);
+	char	**tmp;
+	int		len;
+	int		i;
+
+	len = 0;
+	i = 0;
+	while (av[len])
+		len++;
+	if (!(tmp = (char **)malloc(sizeof(char *) * (len + 1))))
+		return (NULL);
+	while (av[i])
+	{
+		tmp[i] = ft_strdup(av[i]);
+		i++;
+	}
+	tmp[i] = NULL;
+	if (len > 1)
+		return (tmp);
 	else
 	{
-		swap2(&stacks->a);
-		swap2(&stacks->b);
+		free_args(tmp);
+		tmp = ft_split(av[0], ' ');
+		return (tmp);
 	}
 }

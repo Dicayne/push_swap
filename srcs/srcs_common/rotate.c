@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:41:51 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/14 14:16:08 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/14 17:40:26 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void rotate2(t_list **s)
+void	rotate2(t_list **s)
 {
 	t_list *tmp;
 
@@ -27,7 +27,7 @@ void rotate2(t_list **s)
 	}
 }
 
-void rotate(t_stacks *stacks, char *input)
+void	rotate(t_stacks *stacks, char *input)
 {
 	if (!ft_strcmp(input, "ra"))
 		rotate2(&stacks->a);

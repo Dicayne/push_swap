@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/12 16:16:36 by vmoreau           #+#    #+#              #
-#    Updated: 2021/04/14 15:29:05 by vmoreau          ###   ########.fr        #
+#    Updated: 2021/04/15 13:33:33 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,20 +28,25 @@ CYAN = \033[1;36m
 WHITE = \033[0;37m
 
 #####################################PATH######################################
-CH	= ./srcs_checker/
+CH	= ./srcs/srcs_checker/
 
-PS	= ./srcs_push_swap/
+PS	= ./srcs/srcs_push_swap/
+
+CO	= ./srcs/srcs_common/
 ################################SOURCES CHECKER################################
-SRCS1 += $(CH)main.c	$(CH)store.c	$(CH)utils.c 	$(CH)input_verif.c	\
-		 $(CH)swap.c	$(CH)push.c		$(CH)rotate.c	$(CH)r_rotate.c	\
+SRCS1 += $(CH)main.c	$(CH)input_verif.c								\
+		 $(CO)store.c	$(CO)store2.c	$(CO)utils.c					\
+		 $(CO)swap.c	$(CO)push.c		$(CO)rotate.c	$(CO)r_rotate.c
 
 ###############################SOURCES PUSH_SWAP###############################
 SRCS2 += $(PS)main.c
+		 $(CO)store.c	$(CO)store2.c	$(CO)utils.c 					\
+		 $(CO)swap.c	$(CO)push.c		$(CO)rotate.c	$(CO)r_rotate.c
 
 ####################################BASIC######################################
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-# CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 CC = clang
 

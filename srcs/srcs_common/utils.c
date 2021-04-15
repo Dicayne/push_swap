@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 14:12:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/14 16:27:01 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/14 18:42:06 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	display_lst(t_list *a, t_list *b)
 		else
 			printf(" \n");
 	}
-	printf("a    b\n");
+	printf("⬆️    ⬆️\na    b\n");
 }

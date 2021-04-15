@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:41:50 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/14 16:26:44 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/14 18:26:29 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,13 @@ void	up_stack(t_list **s)
 void	push2(t_list **a, t_list **b)
 {
 	int *num;
-	t_list *tmp;
 
-	if (a || *a)
+	if (*a)
 	{
-		tmp = *a;
 		num = (int *)malloc(sizeof(int));
-		*num = *(int *)tmp->content;
-		ft_lstadd_back(b, ft_lstnew(num));
-		up_stack(&tmp);
+		*num = *(int *)(*a)->content;
+		ft_lstadd_front(b, ft_lstnew(num));
+		up_stack(a);
 	}
 }
 

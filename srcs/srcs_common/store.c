@@ -6,11 +6,12 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 00:52:11 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/13 17:31:17 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/15 01:48:10 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
 static int	check_douplicate(long *val_tab, size_t len)
 {
 	size_t i;
@@ -57,14 +58,13 @@ static int	is_num(char *av)
 		return (-1);
 	else
 		return (0);
-
 }
 
 static int	check_args(char **av)
 {
-	size_t len;
-	long *val_tab;
-	size_t i;
+	size_t	len;
+	long	*val_tab;
+	size_t	i;
 
 	len = 0;
 	while (av[len])
@@ -76,26 +76,38 @@ static int	check_args(char **av)
 		val_tab[i] = atol(av[i]);
 		i++;
 	}
-	if (i < len)
+	if (i < len || check_limits(val_tab, len) == -1)
+	{
+		free(val_tab);
 		return (-1);
+	}
 	else
-		return (check_limits(val_tab, len));
+	{
+		free(val_tab);
+		return (0);
+	}
 }
 
 int			store_val(t_list **a, char **av)
 {
-	size_t i;
-	int *num;
+	size_t	i;
+	int		*num;
+	char	**args;
 
-	if (check_args(av))
+	args = stock_av(av);
+	if (check_args(args))
+	{
+		free_args(args);
 		return (-1);
+	}
 	i = 0;
-	while (av[i])
+	while (args[i])
 	{
 		num = (int *)malloc(sizeof(int));
-		*num = ft_atoi(av[i]);
+		*num = ft_atoi(args[i]);
 		ft_lstadd_back(a, ft_lstnew(num));
 		i++;
 	}
+	free_args(args);
 	return (0);
 }

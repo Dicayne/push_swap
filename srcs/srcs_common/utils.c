@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 14:12:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/14 18:42:06 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/16 02:01:07 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@ int		is_sorted(t_list *a)
 	int *i;
 	int *j;
 
-	while (a->next)
+	if (a)
 	{
-		i = a->content;
-		j = a->next->content;
-		if (*i > *j)
-			return (-1);
-		a = a->next;
+		while (a->next)
+		{
+			i = a->content;
+			j = a->next->content;
+			if (*i > *j)
+				return (-1);
+			a = a->next;
+		}
+		return (0);
 	}
-	return (0);
+	return (-1);
 }
 
 void	display(t_list *a)
@@ -50,11 +54,11 @@ void	display_lst(t_list *a, t_list *b)
 		if (a)
 		{
 			i = (int *)a->content;
-			printf("%d    ", *i);
+			printf("%d\t", *i);
 			a = a->next;
 		}
 		else
-			printf("     ");
+			printf("\t");
 		if (b)
 		{
 			i = (int *)b->content;
@@ -64,5 +68,5 @@ void	display_lst(t_list *a, t_list *b)
 		else
 			printf(" \n");
 	}
-	printf("⬆️    ⬆️\na    b\n");
+	printf("⬆️\t⬆️\na\tb\n\n");
 }

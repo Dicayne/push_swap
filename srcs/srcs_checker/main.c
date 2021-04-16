@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:16:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/15 01:59:39 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/15 22:36:31 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ int		main(int ac, char **av)
 
 	stacks.a = NULL;
 	stacks.b = NULL;
+	stacks.size_a = 0;
+	stacks.size_b = 0;
 	if (ac != 1)
 	{
-		if (!store_val(&stacks.a, ++av))
+		if (!store_val(&stacks.a, &stacks.size_a, ++av))
 		{
 			wait_input(&stacks);
 			if (!stacks.b && !is_sorted(stacks.a))

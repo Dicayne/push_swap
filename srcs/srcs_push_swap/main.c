@@ -6,16 +6,20 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:16:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/15 01:56:22 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/16 02:01:19 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort(t_stacks *stacks)
+void	find_algo(t_stacks *stacks)
 {
-	rotate(stacks, "ra");
-	printf("ra\n");
+	if (stacks->size_a <= 3)
+		ez_sort(stacks->a, stacks->size_a);
+	else if (stacks->size_a < 50)
+		nm_sort(stacks);
+	else
+		big_sort(stacks);
 }
 
 int		main(int ac, char **av)
@@ -24,14 +28,14 @@ int		main(int ac, char **av)
 
 	stacks.a = NULL;
 	stacks.b = NULL;
+	stacks.size_a = 0;
+	stacks.size_b = 0;
 	if (ac != 1)
 	{
-		if (!store_val(&stacks.a, ++av))
+		if (!store_val(&stacks.a, &stacks.size_a, ++av))
 		{
-			while (is_sorted(stacks.a) || stacks.b)
-			{
-				sort(&stacks);
-			}
+			if (is_sorted(stacks.a) || stacks.b)
+				find_algo(&stacks);
 			ft_lstclear(stacks.a);
 			ft_lstclear(stacks.b);
 		}

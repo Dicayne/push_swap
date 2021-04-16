@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 00:52:11 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/15 01:48:10 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/15 22:38:57 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	check_args(char **av)
 	}
 }
 
-int			store_val(t_list **a, char **av)
+int			store_val(t_list **a, int *size_a, char **av)
 {
 	size_t	i;
 	int		*num;
@@ -106,6 +106,7 @@ int			store_val(t_list **a, char **av)
 		num = (int *)malloc(sizeof(int));
 		*num = ft_atoi(args[i]);
 		ft_lstadd_back(a, ft_lstnew(num));
+		*size_a += 1;
 		i++;
 	}
 	free_args(args);

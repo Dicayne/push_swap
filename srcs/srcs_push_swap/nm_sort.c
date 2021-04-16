@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_rotate.c                                         :+:      :+:    :+:   */
+/*   nm_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/13 15:41:51 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/15 23:06:29 by vmoreau          ###   ########.fr       */
+/*   Created: 2021/04/15 17:35:25 by vmoreau           #+#    #+#             */
+/*   Updated: 2021/04/16 01:58:49 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	r_rotate2(t_list **s)
+void		nm_sort(t_stacks *stacks)
 {
-	t_list *tmp;
-
-	if (ft_lstsize(*s) > 1)
+	while (is_sorted(stacks->a))
 	{
-		tmp = *s;
-		if (tmp)
-			r_rotate2(&tmp->next);
-		swap2(&tmp);
+		up_min(&stacks->a, stacks->size_a);
+		if (is_sorted(stacks->a))
+		{
+			push(stacks, "pb");
+			printf("pb\n");
+		}
 	}
-}
-
-void	r_rotate(t_stacks *stacks, char *input)
-{
-	if (!ft_strcmp(input, "rra"))
-		r_rotate2(&stacks->a);
-	else if (!ft_strcmp(input, "rrb"))
-		r_rotate2(&stacks->b);
-	else
+	while (stacks->b)
 	{
-		r_rotate2(&stacks->a);
-		r_rotate2(&stacks->b);
+		push(stacks, "pa");
+		printf("pa\n");
 	}
 }

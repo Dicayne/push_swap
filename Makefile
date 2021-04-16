@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/12 16:16:36 by vmoreau           #+#    #+#              #
-#    Updated: 2021/04/15 13:33:33 by vmoreau          ###   ########.fr        #
+#    Updated: 2021/04/16 01:56:41 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,20 +33,26 @@ CH	= ./srcs/srcs_checker/
 PS	= ./srcs/srcs_push_swap/
 
 CO	= ./srcs/srcs_common/
-################################SOURCES CHECKER################################
-SRCS1 += $(CH)main.c	$(CH)input_verif.c								\
-		 $(CO)store.c	$(CO)store2.c	$(CO)utils.c					\
-		 $(CO)swap.c	$(CO)push.c		$(CO)rotate.c	$(CO)r_rotate.c
 
-###############################SOURCES PUSH_SWAP###############################
-SRCS2 += $(PS)main.c
-		 $(CO)store.c	$(CO)store2.c	$(CO)utils.c 					\
-		 $(CO)swap.c	$(CO)push.c		$(CO)rotate.c	$(CO)r_rotate.c
+################################COMMON  SOURCES################################
+
+SRCS_COMMON +=  $(CO)store.c	$(CO)store2.c		$(CO)utils.c			\
+				$(CO)swap.c		$(CO)push.c			$(CO)rotate.c			\
+				$(CO)r_rotate.c
+
+################################CHECKER SOURCES################################
+SRCS_CHECKER += $(CH)main.c		$(CH)input_verif.c							\
+				$(SRCS_COMMON)
+
+###############################PUSH_SWAP SOURCES###############################
+SRCS_P_SWAP  += $(PS)main.c		$(PS)ez_sort.c		$(PS)nm_sort.c			\
+				$(PS)big_sort.c	$(PS)sort_utils.c	$(PS)finder.c			\
+		 		$(SRCS_COMMON)
 
 ####################################BASIC######################################
 
-# CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror
 
 CC = clang
 
@@ -54,9 +60,9 @@ INC = Header/
 
 HEADER = $(INC)push_swap.h
 
-OBJ1 = $(SRCS1:.c=.o)
+OBJ_CHECKER = $(SRCS_CHECKER:.c=.o)
 
-OBJ2 = $(SRCS2:.c=.o)
+OBJ_P_SWAP = $(SRCS_P_SWAP:.c=.o)
 
 ####################################LIBFT######################################
 
@@ -67,19 +73,19 @@ LIBFTLINK = -L$(LIB) -lft
 
 all : complib $(NAME1) $(NAME2)
 
-$(NAME1) : echoCC $(OBJ1) echoOK echoCS
-	$(CC) $(CFLAGS) -o $@ $(OBJ1) $(LIBFTLINK)
+$(NAME1) : echoCC $(OBJ_CHECKER) echoOK echoCS
+	$(CC) $(CFLAGS) -o $@ $(OBJ_CHECKER) $(LIBFTLINK)
 
-$(NAME2) : echoCPS $(OBJ2) echoOK2 echoCS2
-	$(CC) $(CFLAGS) -o $@ $(OBJ2) $(LIBFTLINK)
+$(NAME2) : echoCPS $(OBJ_P_SWAP) echoOK2 echoCS2
+	$(CC) $(CFLAGS) -o $@ $(OBJ_P_SWAP) $(LIBFTLINK)
 
 %.o: %.c $(HEADER)
 	$(CC) -c $(CFLAGS) -I $(INC) $< -o $@
 	printf "$(GREEN)██"
 
 clean :	echoCLEAN
-	$(RM) $(OBJ1)
-	$(RM) $(OBJ2)
+	$(RM) $(OBJ_CHECKER)
+	$(RM) $(OBJ_P_SWAP)
 	$(MAKE) clean -C $(LIB)
 
 fclean : clean echoFCLEAN

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:41:52 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/15 23:08:53 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/16 19:43:53 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@ void	swap2(t_list **s)
 {
 	t_list	*tmp;
 	int		*tmp_num;
+	int		tmp_pose;
 
 	if (ft_lstsize(*s) > 1)
 	{
 		tmp = *s;
 		tmp_num = tmp->content;
+		tmp_pose = tmp->pos;
 		tmp->content = tmp->next->content;
+		tmp->pos = tmp->next->pos;
 		tmp->next->content = tmp_num;
+		tmp->next->pos = tmp_pose;
 	}
 }
 

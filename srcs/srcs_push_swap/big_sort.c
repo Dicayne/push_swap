@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 17:41:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/16 02:02:08 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/17 02:10:23 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,18 @@ void		big_sort(t_stacks *stacks)
 {
 	int pivot;
 
-	while (stacks->a->next)
+	while (stacks->a->next && stacks->size_a > 2)
 	{
 		pivot = find_pivot(stacks->a, stacks->size_a);
 		push_under_pivot(stacks, pivot);
 	}
 	push(stacks, "pb");
 	printf("pb\n");
+	if (stacks->a->pos != stacks->size_max - (stacks->size_max - 1))
+	{
+		push(stacks, "pb");
+		printf("pb\n");
+	}
 	while (stacks->b)
 	{
 		up_max(&stacks->b, stacks->size_b);

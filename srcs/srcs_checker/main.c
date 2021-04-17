@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:16:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/15 22:36:31 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/17 02:01:14 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,40 +32,74 @@ void	catch_input(t_stacks *stacks, char *input)
 		printf("Error\n");
 }
 
-void	wait_input(t_stacks *stacks)
+void	wait_input(t_stacks *stacks, t_sdl *sdl)
 {
 	char *line;
 
+	if (stacks->bonus_v > 0)
+		draw(stacks, sdl);
 	while (get_next_line(0, &line))
 	{
 		printf("Input: %s\n", line);
 		catch_input(stacks, line);
-		display_lst(stacks->a, stacks->b);
-		if (line)
-			free(line);
+		if (stacks->bonus_v > 0)
+		{
+			SDL_RenderClear(sdl->renderer);
+			draw(stacks, sdl);
+			usleep(50 * 1000);
+		}
+		free(line);
 	}
 	free(line);
 }
 
+int		check_bonus(char **av)
+{
+	int i;
+
+	i = 0;
+	if (!ft_strcmp(av[i], "-v"))
+		return (1);
+	while (av[i + 1])
+		i++;
+	if (!ft_strcmp(av[i], "-v"))
+	{
+		av[i] = NULL;
+		return (2);
+	}
+	return (0);
+}
+
+void	init(t_stacks *stacks, char **av)
+{
+	stacks->a = NULL;
+	stacks->b = NULL;
+	stacks->size_a = 0;
+	stacks->size_b = 0;
+	stacks->bonus_v = check_bonus(av);
+}
+
 int		main(int ac, char **av)
 {
-	t_stacks stacks;
+	t_stacks	stacks;
+	t_sdl		sdl;
 
-	stacks.a = NULL;
-	stacks.b = NULL;
-	stacks.size_a = 0;
-	stacks.size_b = 0;
 	if (ac != 1)
 	{
-		if (!store_val(&stacks.a, &stacks.size_a, ++av))
+		init(&stacks, ++av);
+		if (stacks.bonus_v == 1)
+			av++;
+		if (!store_val(&stacks.a, &stacks.size_a, av))
 		{
-			wait_input(&stacks);
+			stacks.size_max = stacks.size_a;
+			if (stacks.bonus_v > 0)
+				init_visualizer(&sdl);
+			wait_input(&stacks, &sdl);
 			if (!stacks.b && !is_sorted(stacks.a))
 				printf("OK\n");
 			else
 				printf("KO\n");
-			ft_lstclear(stacks.a);
-			ft_lstclear(stacks.b);
+			clean(&sdl, &stacks);
 		}
 		else
 			printf("Error\n");

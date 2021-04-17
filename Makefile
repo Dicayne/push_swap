@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/12 16:16:36 by vmoreau           #+#    #+#              #
-#    Updated: 2021/04/16 01:56:41 by vmoreau          ###   ########.fr        #
+#    Updated: 2021/04/17 02:12:47 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ CO	= ./srcs/srcs_common/
 
 SRCS_COMMON +=  $(CO)store.c	$(CO)store2.c		$(CO)utils.c			\
 				$(CO)swap.c		$(CO)push.c			$(CO)rotate.c			\
-				$(CO)r_rotate.c
+				$(CO)r_rotate.c	$(CH)sdl2.c
 
 ################################CHECKER SOURCES################################
 SRCS_CHECKER += $(CH)main.c		$(CH)input_verif.c							\
@@ -51,8 +51,8 @@ SRCS_P_SWAP  += $(PS)main.c		$(PS)ez_sort.c		$(PS)nm_sort.c			\
 
 ####################################BASIC######################################
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-# CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 CC = clang
 
@@ -74,10 +74,10 @@ LIBFTLINK = -L$(LIB) -lft
 all : complib $(NAME1) $(NAME2)
 
 $(NAME1) : echoCC $(OBJ_CHECKER) echoOK echoCS
-	$(CC) $(CFLAGS) -o $@ $(OBJ_CHECKER) $(LIBFTLINK)
+	$(CC) $(CFLAGS) -o $@ $(OBJ_CHECKER) $(LIBFTLINK) -lSDL2 -lSDL2main
 
 $(NAME2) : echoCPS $(OBJ_P_SWAP) echoOK2 echoCS2
-	$(CC) $(CFLAGS) -o $@ $(OBJ_P_SWAP) $(LIBFTLINK)
+	$(CC) $(CFLAGS) -o $@ $(OBJ_P_SWAP) $(LIBFTLINK) -lSDL2 -lSDL2main
 
 %.o: %.c $(HEADER)
 	$(CC) -c $(CFLAGS) -I $(INC) $< -o $@

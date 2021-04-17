@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:16:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/16 02:01:19 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/17 01:22:22 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int		main(int ac, char **av)
 {
 	t_stacks stacks;
 
-	stacks.a = NULL;
-	stacks.b = NULL;
-	stacks.size_a = 0;
-	stacks.size_b = 0;
 	if (ac != 1)
 	{
+		stacks.a = NULL;
+		stacks.b = NULL;
+		stacks.size_a = 0;
+		stacks.size_b = 0;
 		if (!store_val(&stacks.a, &stacks.size_a, ++av))
 		{
 			if (is_sorted(stacks.a) || stacks.b)

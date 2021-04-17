@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 00:52:11 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/15 22:38:57 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/16 19:29:36 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int			store_val(t_list **a, int *size_a, char **av)
 		*size_a += 1;
 		i++;
 	}
+	stock_pos_val(a, *size_a);
 	free_args(args);
 	return (0);
 }

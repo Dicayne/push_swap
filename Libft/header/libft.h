@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:13:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/14 16:04:16 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/16 17:18:18 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 typedef struct	s_list
 {
 	void			*content;
+	int				pos;
 	struct s_list	*next;
 }				t_list;
 /*

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 00:52:11 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/16 01:51:43 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/16 18:42:33 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ void	free_args(char **args)
 		i++;
 	}
 	free(args);
+}
+
+void	stock_pos_val(t_list **a, int size)
+{
+	t_list *tmp;
+
+	tmp = *a;
+	while (tmp)
+	{
+		tmp->pos = find_pos_val_sdl(*a, size, *(int *)tmp->content);
+		tmp = tmp->next;
+	}
 }
 
 char	**stock_av(char **av)

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 17:22:15 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/16 02:03:09 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/17 02:12:09 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "../Libft/header/libft.h"
 # include "limits.h"
+# include <SDL2/SDL.h>
 
 /*
 **-----------------------------------STRUCT-------------------------------------
@@ -27,12 +28,23 @@ typedef struct	s_stacks
 	int		size_a;
 	t_list	*b;
 	int		size_b;
+	int		size_max;
+	int		bonus_v;
 }				t_stacks;
+
+typedef struct	s_sdl
+{
+	SDL_Window		*window;
+	int				w;
+	int				h;
+	SDL_Renderer	*renderer;
+}				t_sdl;
 
 /*
 **----------------------------------FUNCTION------------------------------------
 */
 int				store_val(t_list **a, int *size_a, char **av);
+void			stock_pos_val(t_list **a, int size);
 char			**stock_av(char **av);
 void			free_args(char **args);
 void			display(t_list *a);
@@ -81,5 +93,13 @@ void			rotate2(t_list **s);
 void			r_rotate(t_stacks *stacks, char *input);
 void			r_rotate2(t_list **s);
 void			do_rotate(t_list **a, char *input, int val);
+
+/*
+**---------------------------------VISUALIZER-----------------------------------
+*/
+void			init_visualizer(t_sdl *sdl);
+int				find_pos_val_sdl(t_list *a, int size, int val);
+void			draw(t_stacks *stack, t_sdl *sdl);
+void			clean(t_sdl *sdl, t_stacks *stacks);
 
 #endif

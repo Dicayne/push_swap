@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:41:50 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/15 23:23:22 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/16 19:40:43 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	push2(t_list **a, t_list **b, int *size_a, int *size_b)
 		num = (int *)malloc(sizeof(int));
 		*num = *(int *)(*a)->content;
 		ft_lstadd_front(b, ft_lstnew(num));
+		(*b)->pos = (*a)->pos;
 		up_stack(a, *size_a);
 		*size_a -= 1;
 		*size_b += 1;

@@ -6,11 +6,25 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 14:12:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/16 02:01:07 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/17 16:15:51 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int		find_pos_val(t_list *a, int size, int val)
+{
+	int	nb;
+
+	nb = 0;
+	while (a)
+	{
+		if (*(int *)a->content > val)
+			nb++;
+		a = a->next;
+	}
+	return (size - nb);
+}
 
 int		is_sorted(t_list *a)
 {

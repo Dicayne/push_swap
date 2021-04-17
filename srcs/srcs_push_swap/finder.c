@@ -6,26 +6,20 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 01:54:47 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/16 02:01:39 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/18 01:21:08 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int			find_pivot(t_list *a, int size)
+int			find_pivot(t_list *a, int slice)
 {
-	int i;
-
-	i = 0;
-	while (i < size / 2)
-	{
+	while (a->pos != slice)
 		a = a->next;
-		i++;
-	}
 	return (*(int *)a->content);
 }
 
-int			find_val(t_list *s, int pivot)
+int			find_val_under_pivot(t_list *s, int pivot)
 {
 	int i;
 

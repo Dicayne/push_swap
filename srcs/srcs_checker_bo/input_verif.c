@@ -6,11 +6,11 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 14:12:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/17 16:08:01 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/17 16:27:04 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 int		verif_swap_input(char *input)
 {

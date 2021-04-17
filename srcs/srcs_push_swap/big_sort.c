@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 17:41:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/17 02:10:23 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/18 01:36:44 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		up_under_pivot(t_list **a, int size, int pivot)
 	int		val;
 
 	tmp = *a;
-	val = find_val(tmp, pivot);
+	val = find_val_under_pivot(tmp, pivot);
 	pos_val = find_val_pos(val, tmp);
 	if (pos_val > size / 2)
 		do_rotate(a, "rra", val);
@@ -40,24 +40,28 @@ void		push_under_pivot(t_stacks *stacks, int pivot)
 void		big_sort(t_stacks *stacks)
 {
 	int pivot;
+	int pivot_pos;
+	int	slice;
+	int i;
 
-	while (stacks->a->next && stacks->size_a > 2)
+	i = 1;
+	slice = stacks->size_max / 5;
+	while (i <= 5)
 	{
-		pivot = find_pivot(stacks->a, stacks->size_a);
+		if (i < 5)
+			pivot_pos = slice * i;
+		else
+			pivot_pos = stacks->size_max;
+		pivot = find_pivot(stacks->a, pivot_pos);
 		push_under_pivot(stacks, pivot);
+		i++;
 	}
 	push(stacks, "pb");
 	printf("pb\n");
-	if (stacks->a->pos != stacks->size_max - (stacks->size_max - 1))
-	{
-		push(stacks, "pb");
-		printf("pb\n");
-	}
 	while (stacks->b)
 	{
 		up_max(&stacks->b, stacks->size_b);
 		push(stacks, "pa");
 		printf("pa\n");
 	}
-	// display_lst(stacks->a, stacks->b);
 }

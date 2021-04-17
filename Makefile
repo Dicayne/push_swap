@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/12 16:16:36 by vmoreau           #+#    #+#              #
-#    Updated: 2021/04/17 02:12:47 by vmoreau          ###   ########.fr        #
+#    Updated: 2021/04/17 17:38:49 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ WHITE = \033[0;37m
 #####################################PATH######################################
 CH	= ./srcs/srcs_checker/
 
+BO	= ./srcs/srcs_checker_bo/
+
 PS	= ./srcs/srcs_push_swap/
 
 CO	= ./srcs/srcs_common/
@@ -38,10 +40,14 @@ CO	= ./srcs/srcs_common/
 
 SRCS_COMMON +=  $(CO)store.c	$(CO)store2.c		$(CO)utils.c			\
 				$(CO)swap.c		$(CO)push.c			$(CO)rotate.c			\
-				$(CO)r_rotate.c	$(CH)sdl2.c
+				$(CO)r_rotate.c
 
 ################################CHECKER SOURCES################################
 SRCS_CHECKER += $(CH)main.c		$(CH)input_verif.c							\
+				$(SRCS_COMMON)
+
+################################BONUS SOURCES################################
+SRCS_BONUS	 += $(BO)main.c		$(BO)input_verif.c	$(BO)sdl2.c						\
 				$(SRCS_COMMON)
 
 ###############################PUSH_SWAP SOURCES###############################
@@ -51,8 +57,8 @@ SRCS_P_SWAP  += $(PS)main.c		$(PS)ez_sort.c		$(PS)nm_sort.c			\
 
 ####################################BASIC######################################
 
-# CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror
 
 CC = clang
 
@@ -60,7 +66,11 @@ INC = Header/
 
 HEADER = $(INC)push_swap.h
 
+HEADER_BO = $(INC)push_swap_bonus.h
+
 OBJ_CHECKER = $(SRCS_CHECKER:.c=.o)
+
+OBJ_BONUS = $(SRCS_BONUS:.c=.o)
 
 OBJ_P_SWAP = $(SRCS_P_SWAP:.c=.o)
 
@@ -74,18 +84,22 @@ LIBFTLINK = -L$(LIB) -lft
 all : complib $(NAME1) $(NAME2)
 
 $(NAME1) : echoCC $(OBJ_CHECKER) echoOK echoCS
-	$(CC) $(CFLAGS) -o $@ $(OBJ_CHECKER) $(LIBFTLINK) -lSDL2 -lSDL2main
+	$(CC) $(CFLAGS) -o $@ $(OBJ_CHECKER) $(LIBFTLINK)
+
+bonus : complib echoCC $(OBJ_BONUS) echoOK echoCS $(NAME2)
+	$(CC) $(CFLAGS) -o checker $(OBJ_BONUS) $(LIBFTLINK) -lSDL2 -lSDL2main
 
 $(NAME2) : echoCPS $(OBJ_P_SWAP) echoOK2 echoCS2
-	$(CC) $(CFLAGS) -o $@ $(OBJ_P_SWAP) $(LIBFTLINK) -lSDL2 -lSDL2main
+	$(CC) $(CFLAGS) -o $@ $(OBJ_P_SWAP) $(LIBFTLINK)
 
-%.o: %.c $(HEADER)
+%.o: %.c $(HEADER) $(HEADER_BO)
 	$(CC) -c $(CFLAGS) -I $(INC) $< -o $@
 	printf "$(GREEN)██"
 
 clean :	echoCLEAN
 	$(RM) $(OBJ_CHECKER)
 	$(RM) $(OBJ_P_SWAP)
+	$(RM) $(OBJ_BONUS)
 	$(MAKE) clean -C $(LIB)
 
 fclean : clean echoFCLEAN

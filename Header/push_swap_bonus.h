@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 17:22:15 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/18 01:08:38 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/18 01:08:52 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef PUSH_SWAP_BONUS_H
+# define PUSH_SWAP_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>
 # include "../Libft/header/libft.h"
 # include "limits.h"
+# include <SDL2/SDL.h>
 
 /*
 **-----------------------------------STRUCT-------------------------------------
@@ -28,7 +29,16 @@ typedef struct	s_stacks
 	t_list	*b;
 	int		size_b;
 	int		size_max;
+	int		bonus_v;
 }				t_stacks;
+
+typedef struct	s_sdl
+{
+	SDL_Window		*window;
+	int				w;
+	int				h;
+	SDL_Renderer	*renderer;
+}				t_sdl;
 
 /*
 **----------------------------------FUNCTION------------------------------------
@@ -84,5 +94,12 @@ void			rotate2(t_list **s);
 void			r_rotate(t_stacks *stacks, char *input);
 void			r_rotate2(t_list **s);
 void			do_rotate(t_list **a, char *input, int val);
+
+/*
+**---------------------------------VISUALIZER-----------------------------------
+*/
+void			init_visualizer(t_sdl *sdl);
+void			draw(t_stacks *stack, t_sdl *sdl);
+void			clean(t_sdl *sdl, t_stacks *stacks);
 
 #endif

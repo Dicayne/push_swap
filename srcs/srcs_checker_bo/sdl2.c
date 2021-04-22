@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:16:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/17 16:15:39 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/22 16:23:57 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	clean(t_sdl *sdl, t_stacks *stacks)
 	if (stacks->bonus_v > 0)
 	{
 		SDL_Delay(5000);
-		SDL_DestroyWindow(sdl->window);
+		SDL_RenderClear(sdl->renderer);
 		SDL_DestroyRenderer(sdl->renderer);
+		SDL_DestroyWindow(sdl->window);
 		SDL_Quit();
 	}
 }
@@ -70,6 +71,19 @@ void	draw(t_stacks *stacks, t_sdl *sdl)
 	SDL_SetRenderDrawColor(sdl->renderer, 155, 195, 210, 255);
 }
 
+void	fill_renderer(t_sdl *sdl)
+{
+	SDL_Rect screen;
+
+	screen.x = 0;
+	screen.y = 0;
+	screen.w = sdl->w;
+	screen.h = sdl->h;
+	SDL_SetRenderDrawColor(sdl->renderer, 155, 195, 210, 255);
+	SDL_RenderFillRect(sdl->renderer, &screen);
+	SDL_RenderPresent(sdl->renderer);
+}
+
 void	init_visualizer(t_sdl *sdl)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) == 0)
@@ -82,6 +96,7 @@ void	init_visualizer(t_sdl *sdl)
 		if (sdl->renderer == NULL)
 			printf("ERROR RENDERER CREATION SDL : %s\n", SDL_GetError());
 		SDL_GetWindowSize(sdl->window, &sdl->w, &sdl->h);
+		fill_renderer(sdl);
 	}
 	else
 		printf("ERROR INIT SDL : %s\n", SDL_GetError());

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 17:22:15 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/18 01:08:52 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:36:09 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,9 @@ void			big_sort(t_stacks *stacks);
 /*
 **-----------------FINDER
 */
-int				find_min(t_list *s);
-int				find_max(t_list *s);
-int				find_val_under_pivot(t_list *s, int pivot);
-int				find_val_pos(int min, t_list *s);
-int				find_pivot(t_list *a, int slice);
+int				find_min(t_list *s, int *pos_min);
+int				find_max(t_list *s, int *pos_max);
+int				find_val_under_pivot(t_list *s, int pos_pivot, int *pos_val);
 int				find_pos_val(t_list *a, int size, int val);
 
 /*
@@ -81,7 +79,6 @@ int				find_pos_val(t_list *a, int size, int val);
 */
 void			up_max(t_list **a, int size);
 void			up_min(t_list **a, int size);
-int				no_val_under_pivot(t_list *s, int pivot);
 
 /*
 **-----------------------------------ACTION-------------------------------------

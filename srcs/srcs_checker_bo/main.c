@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:16:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/18 01:38:15 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/22 17:55:44 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	wait_input(t_stacks *stacks, t_sdl *sdl)
 	int		speed;
 
 	if (stacks->size_max >= 100)
-		speed = 10;
+		speed = 2;
 	else
-		speed = 50;
+		speed = 2;
 	if (stacks->bonus_v > 0)
 		draw(stacks, sdl);
 	while (get_next_line(0, &line))
 	{
-		printf("Input: %s\n", line);
+		// printf("Input: %s\n", line);
 		catch_input(stacks, line);
 		if (stacks->bonus_v > 0)
 		{

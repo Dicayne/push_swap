@@ -36,3 +36,12 @@ You can also execute program one by one:
 ```
 ./push_swap will display all action.\
 ./checker will wait input from you to sort the list.
+
+### VISUALIZER
+If you want a vizualizer, you need to have SDL2 package installed, then execute those commands:
+
+```
+make bonus
+ARG=$(./genstack.pl <size of the list> <min value> <max value>)
+./push_swap $ARG | ./checker $ARG -v
+```

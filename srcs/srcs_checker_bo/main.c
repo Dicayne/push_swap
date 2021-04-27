@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:16:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/22 17:55:44 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/27 15:45:13 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,18 @@ void	wait_input(t_stacks *stacks, t_sdl *sdl)
 	char	*line;
 	int		speed;
 
-	if (stacks->size_max >= 100)
-		speed = 2;
+	if (stacks->size_max >= 100 && stacks->size_max < 200)
+		speed = 10;
+	else if (stacks->size_max >= 200)
+		speed = 5;
 	else
-		speed = 2;
-	if (stacks->bonus_v > 0)
+		speed = 30;
+	if (sdl->bonus_v > 0)
 		draw(stacks, sdl);
 	while (get_next_line(0, &line))
 	{
-		// printf("Input: %s\n", line);
 		catch_input(stacks, line);
-		if (stacks->bonus_v > 0)
+		if (sdl->bonus_v > 0)
 		{
 			SDL_RenderClear(sdl->renderer);
 			draw(stacks, sdl);
@@ -58,30 +59,38 @@ void	wait_input(t_stacks *stacks, t_sdl *sdl)
 	free(line);
 }
 
-int		check_bonus(char **av)
+void	init(t_stacks *stacks, t_sdl *sdl, char **av)
 {
 	int i;
 
 	i = 0;
-	if (!ft_strcmp(av[i], "-v"))
-		return (1);
-	while (av[i + 1])
-		i++;
-	if (!ft_strcmp(av[i], "-v"))
-	{
-		av[i] = NULL;
-		return (2);
-	}
-	return (0);
-}
-
-void	init(t_stacks *stacks, char **av)
-{
 	stacks->a = NULL;
 	stacks->b = NULL;
 	stacks->size_a = 0;
 	stacks->size_b = 0;
-	stacks->bonus_v = check_bonus(av);
+	if (!ft_strcmp(av[i], "-v"))
+		sdl->bonus_v = 1;
+	else
+	{
+		while (av[i + 1])
+			i++;
+		if (!ft_strcmp(av[i], "-v"))
+		{
+			av[i] = NULL;
+			sdl->bonus_v = 2;
+		}
+		else
+			sdl->bonus_v = 0;
+	}
+}
+
+void	check_size(t_sdl *sdl, int size_max)
+{
+	if (size_max > 400 && sdl->bonus_v > 0)
+	{
+		printf("Integer list is too big to be displayed!\n");
+		sdl->bonus_v = 0;
+	}
 }
 
 int		main(int ac, char **av)
@@ -91,13 +100,14 @@ int		main(int ac, char **av)
 
 	if (ac != 1)
 	{
-		init(&stacks, ++av);
-		if (stacks.bonus_v == 1)
+		init(&stacks, &sdl, ++av);
+		if (sdl.bonus_v == 1)
 			av++;
 		if (av[0] && !store_val(&stacks.a, &stacks.size_a, av))
 		{
 			stacks.size_max = stacks.size_a;
-			if (stacks.bonus_v > 0)
+			check_size(&sdl, stacks.size_max);
+			if (sdl.bonus_v > 0)
 				init_visualizer(&sdl);
 			wait_input(&stacks, &sdl);
 			if (!stacks.b && !is_sorted(stacks.a))

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:16:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2021/04/22 16:23:57 by vmoreau          ###   ########.fr       */
+/*   Updated: 2021/04/27 15:47:27 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	clean(t_sdl *sdl, t_stacks *stacks)
 {
 	ft_lstclear(stacks->a);
 	ft_lstclear(stacks->b);
-	if (stacks->bonus_v > 0)
+	if (sdl->bonus_v > 0)
 	{
-		SDL_Delay(5000);
+		SDL_Delay(2000);
 		SDL_RenderClear(sdl->renderer);
 		SDL_DestroyRenderer(sdl->renderer);
 		SDL_DestroyWindow(sdl->window);

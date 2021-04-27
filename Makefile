@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/12 16:16:36 by vmoreau           #+#    #+#              #
-#    Updated: 2021/04/22 17:30:29 by vmoreau          ###   ########.fr        #
+#    Updated: 2021/04/27 15:48:44 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRCS_CHECKER += $(CH)main.c		$(CH)input_verif.c							\
 				$(SRCS_COMMON)
 
 ################################BONUS SOURCES################################
-SRCS_BONUS	 += $(BO)main.c		$(BO)input_verif.c	$(BO)sdl2.c						\
+SRCS_BONUS	 += $(BO)main.c		$(CH)input_verif.c	$(BO)sdl2.c						\
 				$(SRCS_COMMON)
 
 ###############################PUSH_SWAP SOURCES###############################
@@ -57,8 +57,7 @@ SRCS_P_SWAP  += $(PS)main.c		$(PS)ez_sort.c		$(PS)nm_sort.c			\
 
 ####################################BASIC######################################
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 CC = clang
 
